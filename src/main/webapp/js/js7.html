@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+            
+        let imgs=["https://img12.360buyimg.com/pop/s590x470_jfs/t1/223740/37/20796/100454/640984efF82ca5892/4bbd818c9992476e.jpg.webp",
+        "https://imgcps.jd.com/ling4/100023239577/5Lqs6YCJ5aW96LSn/5L2g5YC85b6X5oul5pyJ/p-640dbabb61fd0b75722ca74b/3c293925/cr/s/q.jpg",
+        "https://imgcps.jd.com/img-cubic/creative_server_cid_jdcloud/v2/2000367/100010577141/FocusFullshop/CkNqZnMvdDEvMTA4Nzc1LzQvMjI3MDMvNDUyMDY0LzYzZmJiMDIzRmNlYjFkZjk4LzViNDFiODVkMTNjNzZjMDAucG5nEgk0LXR5XzBfNTUwAjjvi3pCEwoP6YeR57q65p-U6aG65YmCEAFCEgoO5q-P5ruhMTI05YePNDAQAkIQCgznq4vljbPmiqLotK0QBkIKCgbnp43ojYkQB1j1meHI9AI/cr/s/q.jpg"];
+        let interval;
+        function test1() {
+            
+            let img=document.getElementById("img");
+            img.src=imgs[0];
+            interval=setInterval("changeSrc()",1000)
+            
+        }
+        let i=1;
+        function changeSrc(){
+            let img=document.getElementById("img");
+            img.src=imgs[i++];
+            if(i==imgs.length){
+                i=0;
+            }
+        }
+        function stop(){ console.log(interval)
+            clearInterval(interval);
+        }
+
+    </script>
+</head>
+
+<body onload="test1()">
+    <input type="button" value="停止" onclick="stop()">
+    <img src="" id="img" width="200px" height="200px" onmouseover="stop()" onmouseout="test1()">
+</body>
+
+</html>

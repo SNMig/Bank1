@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.addEventListener("load", function () {
+            let num = 1;
+            let addBtn = document.getElementById("addBtn");
+            addBtn.addEventListener("click", function () {
+                let newTr = document.createElement("tr");
+                let newTd1 = document.createElement("td");
+                let newCk = document.createElement("input");
+                newCk.type = "checkbox";
+                newCk.name = "id";
+                newTd1.appendChild(newCk);
+
+
+                let newTd2 = document.createElement("td");
+                newTd2.innerText = "Tom" + num++;
+                let newTd3 = document.createElement("td");
+                let newDelBtn = document.createElement("button");
+                newDelBtn.name = "del";
+                newDelBtn.innerText = "刪除";
+                newTd3.appendChild(newDelBtn);
+                newTr.appendChild(newTd1);
+                newTr.appendChild(newTd2);
+                newTr.appendChild(newTd3);
+
+                document.getElementsByTagName("tbody")[0].appendChild(newTr);
+            });
+
+            //全选
+            let selectAll = document.getElementById("selectAll");
+            selectAll.addEventListener("click", function () {
+                let ids = document.getElementsByName("id");
+                for (let id of ids) {
+                    id.checked = selectAll.checked;
+                }
+            })
+
+
+            document.getElementsByTagName("tbody")[0].addEventListener("click", function (e) {
+                if (e.target.name == "id") {
+                    let checkedNum = 0;
+                    let ids = document.getElementsByName("id");
+                    for (let id of ids) {
+                        if (id.checked) {
+                            checkedNum++;
+                        }
+                    }
+                    if (checkedNum == 0) {
+                        document.getElementById("selectAll").checked = false;
+                    } else if (checkedNum == ids.length) {
+                        document.getElementById("selectAll").checked = true;
+                    } else {
+                        //半选
+                    }
+                } else if (e.target.name == "del") {  //单条数据的删除
+                    if (confirm("您确认删除吗？")) {
+                        e.target.parentNode.parentNode.remove();
+                    }
+                }
+            });
+
+            //批量刪除
+            document.getElementById("delBtn").addEventListener("click", function () {
+                //判断是否选中一条记录
+                let checkedNum = false;
+                let ids = document.getElementsByName("id");
+                for (let id of ids) {
+                    if (id.checked) {
+                        checkedNum = true;
+                        break;
+                    }
+                }
+                if (checkedNum) {
+                    if (confirm("您确认删除吗")) {
+                        let ids = document.getElementsByName("id");
+                        for (let i = 0; i < ids.length; i++) {
+                            if (ids[i].checked) {
+                                ids[i].parentNode.parentNode.remove();
+                                i--;
+                            }
+                        }
+                    }
+                } else {
+                    alert("请至少选中一条记录");
+                }
+            })
+        });
+    </script>
+</head>
+
+<body>
+    <table>
+        <tbody>
+            <tr>
+                <th><input type="checkbox" name="" id="selectAll">全选</th>
+                <th>姓名</th>
+                <th>操作</th>
+            </tr>
+        </tbody>
+    </table>
+    <input type="button" value="增加" id="addBtn"><input type="button" id="delBtn" value="删除">
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function Student(id, name, age) {
+            this.id = id;
+            this.name = name;
+            this.age = age;
+        }
+        function avg(students) {
+            var avg = 0;
+            var total=0;
+            for (var s of students) {
+                var total = total + s.age;
+                avg = total / students.length;
+            }
+            return avg;
+        }
+        student = [new Student(1, "tom", 24), new Student(2, "jom", 21), new Student(3, "som", 18), new Student(4, "qom", 29), new Student(5, "pom", 27)];
+        
+        console.log(avg(student));
+
+    
+        function descagesort(students){
+            for(var i=0;i<students.length-1;i++){
+                for(var j=0;j<students.length-i-1;j++){
+                    if(students[j].age<students[j+1].age){
+                        var temp=students[j+1];
+                        students[j+1]=students[j];
+                        students[j]=temp;
+                    }
+                }
+            }
+            return students;
+        }
+        var students = [new Student(1, "tom", 24), new Student(2, "jom", 21), new Student(3, "som", 18), new Student(4, "qom", 29), new Student(5, "pom", 27)];
+        
+        console.log(descagesort(students));
+        
+    </script>
+    
+
+</head>
+
+<body>
+
+</body>
+
+</html>
